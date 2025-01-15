@@ -19,18 +19,17 @@ class Conta_Bancaria{
             }else{
                 std :: cout << "Saldo inicial inválido. Configurando para 0.\n";
                 Saldo = 0;
-            }
-            
+            }    
         }
-
         //Metodos
-
-        //getter
+        void set_titular(string t){
+            Nome_titular = t;
+        }
         string get_titular(){
             return Nome_titular;
         }
 
-        bool Sacar(float saque){
+        void Sacar(float saque){
             if(saque > Saldo){
                 std :: cout << "Erro: Saque de R$" << saque << " excede o saldo disponível.\n";
             }else{
@@ -39,7 +38,7 @@ class Conta_Bancaria{
             }
         }
 
-        bool Depositar(float dep){
+        void Depositar(float dep){
             if(dep > 0){
                 Saldo += dep;
                 std :: cout << "Depósito de R$" << dep << " realizado com sucesso.\n";
@@ -49,25 +48,20 @@ class Conta_Bancaria{
         }
 
         void Exibir_saldo(){
+            std :: cout << "\nTitular: " << get_titular() << '\n';
             std :: cout << "Saldo atual: R$" << Saldo << "\n";
         }
 };
 
-class Transacao: public Conta_Bancaria{
-    private:
-        string tipo;
-        float valor;
-        int data;
-
-    public:
-        
-};
-
 int main(){
-    Conta_Bancaria conta1 = Conta_Bancaria("Gustavo", 1000);
 
-    conta1.Sacar(500);
-    conta1.Depositar(250);
-    conta1.Exibir_saldo();
+    string titular = "Guto";
+    float quant_inicial = 1000;
+
+    Conta_Bancaria conta = Conta_Bancaria(titular, quant_inicial);
+
+    conta.Depositar(1000);
+    conta.Sacar(500);
+    conta.Exibir_saldo();
     return 0;
 }
